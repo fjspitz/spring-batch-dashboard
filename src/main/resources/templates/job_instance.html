@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Spring Batch Console</title>
+  </head>
+  <body>
+    <div class="container" th:switch="${jobs}">
+    <h2 th:case="null">No records yet!</h2>
+        <div th:case="*">
+            <h1>BATCH_JOB_INSTANCE</h1>
+           	<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">JOB_INSTANCE_ID</th>
+			      <th scope="col">VERSION</th>
+			      <th scope="col">JOB_NAME</th>
+			      <th scope="col">JOB_KEY</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+                <tr th:each="j : ${jobs}">
+                    <td th:text="${j.jobInstanceId}"></td>
+                    <td th:text="${j.version}"></td>
+                    <td th:text="${j.jobName}"></td>
+                    <td th:text="${j.jobKey}"></td>
+                </tr>
+            </tbody>
+        	</table>
+    	</div>      
+    <p><a href="/signup">Add a new</a></p>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

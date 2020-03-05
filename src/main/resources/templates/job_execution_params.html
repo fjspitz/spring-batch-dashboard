@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Spring Batch Console</title>
+  </head>
+  <body>
+    <div class="container" th:switch="${params}">
+    <h2 th:case="null">No records yet!</h2>
+        <div th:case="*">
+            <h1>BATCH_JOB_EXECUTION_PARAMS</h1>
+           	<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">JOB_EXECUTION_ID</th>
+			      <th scope="col">TYPE_CD</th>
+			      <th scope="col">KEY_NAME</th>
+			      <th scope="col">STRING_VAL</th>
+			      <th scope="col">DATE_VAL</th>
+			      <th scope="col">LONG_VAL</th>
+			      <th scope="col">DOUBLE_VAL</th>
+			      <th scope="col">IDENTIFYING</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+                <tr th:each="p : ${params}">
+                    <td th:text="${p.jobExecutionId}"></td>
+                    <td th:text="${p.typeCd}"></td>
+                    <td th:text="${p.keyName}"></td>
+                    <td th:text="${p.stringValue}"></td>
+                    <td th:text="${#dates.format(p.datetimeValue, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${p.longValue}"></td>
+                    <td th:text="${p.doubleValue}"></td>
+                    <td th:text="${p.identifying}"></td>
+                </tr>
+            </tbody>
+        	</table>
+    	</div>      
+    <p><a href="/execution">Volver</a></p>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

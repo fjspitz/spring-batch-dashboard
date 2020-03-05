@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Spring Batch Console</title>
+  </head>
+  <body>
+    <div class="container" th:switch="${steps}">
+    <h2 th:case="null">No records yet!</h2>
+        <div th:case="*">
+            <h1>BATCH_STEP_EXECUTION</h1>
+           	<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">STEP_EXECUTION_ID</th>
+			      <th scope="col">VERSION</th>
+			      <th scope="col">STEP_NAME</th>
+			      <th scope="col">JOB_EXECUTION_ID</th>
+			      <th scope="col">START_TIME</th>
+			      <th scope="col">END_TIME</th>
+			      <th scope="col">STATUS</th>
+			      <th scope="col">COMMIT_COUNT</th>
+			      <th scope="col">READ_COUNT</th>
+			      <th scope="col">FILTER_COUNT</th>
+			      <th scope="col">WRITE_COUNT</th>
+			      <th scope="col">READ_SKIP_COUNT</th>
+			      <th scope="col">WRITE_SKIP_COUNT</th>
+			      <th scope="col">PROCESS_SKIP_COUNT</th>
+			      <th scope="col">ROLLBACK_COUNT</th>
+			      <th scope="col">EXIT_CODE</th>
+			      <th scope="col">EXIT_MESSAGE</th>
+			      <th scope="col">LAST_UPDATED</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+                <tr th:each="s : ${steps}">
+                    <td th:text="${s.stepExecutionId}"></td>
+                    <td th:text="${s.version}"></td>
+                    <td th:text="${s.stepName}"></td>
+                    <td th:text="${s.jobExecutionId}"></td>
+                    <td th:text="${#dates.format(s.startTime, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                    <td th:text="${#dates.format(s.endTime, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                    <td th:text="${s.status}"></td>
+                    <td th:text="${s.commitCount}"></td>
+                    <td th:text="${s.readCount}"></td>
+                    <td th:text="${s.filterCount}"></td>
+                    <td th:text="${s.writeCount}"></td>
+                    <td th:text="${s.readSkipCount}"></td>
+                    <td th:text="${s.writeSkipCount}"></td>
+                    <td th:text="${s.processSkipCount}"></td>
+                    <td th:text="${s.rollbackCount}"></td>
+                    <td th:text="${s.exitCode}"></td>
+                    <td th:text="${s.exitMessage}"></td>
+                    <td th:text="${#dates.format(s.lastUpdated, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                </tr>
+            </tbody>
+        	</table>
+    	</div>      
+    <p><a href="/execution">Volver</a></p>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

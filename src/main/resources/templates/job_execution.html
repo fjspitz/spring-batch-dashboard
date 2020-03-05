@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Spring Batch Console</title>
+  </head>
+  <body>
+    <div class="container" th:switch="${jobs}">
+    <h2 th:case="null">No records yet!</h2>
+        <div th:case="*">
+            <h1>BATCH_JOB_EXECUTION</h1>
+           	<table class="table">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">JOB_EXECUTION_ID</th>
+			      <th scope="col">VERSION</th>
+			      <th scope="col">JOB_INSTANCE_ID</th>
+			      <th scope="col">CREATE_TIME</th>
+			      <th scope="col">START_TIME</th>
+			      <th scope="col">END_TIME</th>
+			      <th scope="col">STATUS</th>
+			      <th scope="col">EXIT_CODE</th>
+			      <th scope="col">EXIT_MESSAGE</th>
+			      <th scope="col">LAST_UPDATED</th>
+			      <th scope="col">JOB_CONFIGURATION_LOCATION</th>
+			      <th scope="col">Params</th>
+			      <th scope="col">Context</th>
+			      <th scope="col">Steps</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+                <tr th:each="j : ${jobs}">
+                    <td th:text="${j.jobExecutionId}"></td>
+                    <td th:text="${j.version}"></td>
+                    <td th:text="${j.jobInstanceId}"></td>
+                    <td th:text="${#dates.format(j.createTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${#dates.format(j.startTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${#dates.format(j.endTime, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${j.status}"></td>
+                    <td th:text="${j.exitCode}"></td>
+                    <td >-</td>
+                    <td th:text="${#dates.format(j.lastUpdated, 'dd-MM-yyyy HH:mm')}"></td>
+                    <td th:text="${j.jobConfigurationLocation}"></td>
+                    <td><a th:href="@{/execution/params/{id}(id=${j.jobExecutionId})}">Params</a></td>
+                    <td><a th:href="@{/execution/context/{id}(id=${j.jobExecutionId})}">Context</a></td>
+                    <td><a th:href="@{/execution/steps/{id}(id=${j.jobExecutionId})}">Steps</a></td>
+                </tr>
+            </tbody>
+        	</table>
+    	</div>      
+    <p><a href="/signup">Add a new</a></p>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
